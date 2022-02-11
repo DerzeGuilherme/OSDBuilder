@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <servicing></servicing>
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <Order>1</Order>
+                    <CommandLine>cmd.exe /c powershell -Command Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force</CommandLine>
+                    <RequiresUserInput>true</RequiresUserInput>
+                    <Description>a</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>2</Order>
+                    <CommandLine>cmd.exe /c powershell -Command Unblock-File C:\Windows\Temp\Win10Script.ps1</CommandLine>
+                    <RequiresUserInput>true</RequiresUserInput>
+                    <Description>b</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c powershell C:\Windows\Temp\Win10Script.ps1</CommandLine>
+                    <Order>3</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                    <Description>aa</Description>
+                </SynchronousCommand>
+            </FirstLogonCommands>
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <HideOnlineAccountScreens>false</HideOnlineAccountScreens>
+                <HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE>
+                <UnattendEnableRetailDemo>false</UnattendEnableRetailDemo>
+                <ProtectYourPC>3</ProtectYourPC>
+                <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+                <HideLocalAccountScreen>true</HideLocalAccountScreen>
+            </OOBE>
+        </component>
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <InputLocale>en-US</InputLocale>
+            <UILanguage>en-US</UILanguage>
+            <SystemLocale>pt-BR</SystemLocale>
+            <UserLocale>pt-BR</UserLocale>
+            <UILanguageFallback>en-US</UILanguageFallback>
+        </component>
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <UserAccounts>
+                <AdministratorPassword>
+                    <Value>Senha123@</Value>
+                    <PlainText>true</PlainText>
+                </AdministratorPassword>
+            </UserAccounts>
+        </component>
+    </settings>
+    <settings pass="windowsPE">
+        <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <SetupUILanguage>
+                <UILanguage>en-US</UILanguage>
+            </SetupUILanguage>
+            <InputLocale>en-US</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <ImageInstall>
+                <OSImage>
+                    <InstallFrom>
+                        <MetaData wcm:action="add">
+                            <Key>/IMAGE/INDEX</Key>
+                            <Value>1</Value>
+                        </MetaData>
+                    </InstallFrom>
+                    <WillShowUI>OnError</WillShowUI>
+                    <InstallTo>
+                        <DiskID>0</DiskID>
+                        <PartitionID>4</PartitionID>
+                    </InstallTo>
+                    <InstallToAvailablePartition>false</InstallToAvailablePartition>
+                </OSImage>
+            </ImageInstall>
+            <EnableFirewall>false</EnableFirewall>
+            <DiskConfiguration>
+                <Disk wcm:action="add">
+                    <CreatePartitions>
+                        <CreatePartition wcm:action="add">
+                            <Order>1</Order>
+                            <Size>300</Size>
+                            <Type>Primary</Type>
+                        </CreatePartition>
+                        <CreatePartition wcm:action="add">
+                            <Order>2</Order>
+                            <Type>EFI</Type>
+                            <Size>260</Size>
+                        </CreatePartition>
+                        <CreatePartition wcm:action="add">
+                            <Extend>true</Extend>
+                            <Order>4</Order>
+                            <Type>Primary</Type>
+                        </CreatePartition>
+                        <CreatePartition wcm:action="add">
+                            <Order>3</Order>
+                            <Type>MSR</Type>
+                            <Size>128</Size>
+                        </CreatePartition>
+                    </CreatePartitions>
+                    <ModifyPartitions>
+                        <ModifyPartition wcm:action="add">
+                            <Order>1</Order>
+                            <Label>WINRE</Label>
+                            <Format>NTFS</Format>
+                            <PartitionID>1</PartitionID>
+                            <TypeID>de94bba4-06d1-4d40-a16a-bfd50179d6ac</TypeID>
+                        </ModifyPartition>
+                        <ModifyPartition wcm:action="add">
+                            <Label>Windows</Label>
+                            <Letter>C</Letter>
+                            <Order>4</Order>
+                            <PartitionID>4</PartitionID>
+                            <Format>NTFS</Format>
+                        </ModifyPartition>
+                        <ModifyPartition wcm:action="add">
+                            <PartitionID>3</PartitionID>
+                            <Order>3</Order>
+                        </ModifyPartition>
+                        <ModifyPartition wcm:action="add">
+                            <Order>2</Order>
+                            <PartitionID>2</PartitionID>
+                            <Format>FAT32</Format>
+                            <Label>System</Label>
+                        </ModifyPartition>
+                    </ModifyPartitions>
+                    <DiskID>0</DiskID>
+                    <WillWipeDisk>true</WillWipeDisk>
+                </Disk>
+                <WillShowUI>OnError</WillShowUI>
+            </DiskConfiguration>
+            <UserData>
+                <ProductKey>
+                    <WillShowUI>OnError</WillShowUI>
+                    <Key>NPPR9-FWDCX-D2C8J-H872K-2YT43</Key>
+                </ProductKey>
+                <AcceptEula>true</AcceptEula>
+                <FullName>Derze</FullName>
+                <Organization>Derze</Organization>
+            </UserData>
+        </component>
+    </settings>
+    <settings pass="offlineServicing">
+        <component name="Microsoft-Windows-LUA-Settings" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <EnableLUA>false</EnableLUA>
+        </component>
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <OfflineUserAccounts>
+                <OfflineAdministratorPassword>
+                    <Value>Senha1232@</Value>
+                    <PlainText>true</PlainText>
+                </OfflineAdministratorPassword>
+            </OfflineUserAccounts>
+        </component>
+    </settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Deployment" processorArchitecture="wow64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <RunAsynchronous>
+                <RunAsynchronousCommand wcm:action="add">
+                    <Credentials>
+                        <Username>Administrator</Username>
+                        <Password>Senha123@</Password>
+                    </Credentials>
+                    <Order>1</Order>
+                    <Path>cmd.exe /c powershell -Command Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force</Path>
+                </RunAsynchronousCommand>
+                <RunAsynchronousCommand wcm:action="add">
+                    <Credentials>
+                        <Username>Administrator</Username>
+                        <Password>Senha123@</Password>
+                    </Credentials>
+                    <Path>powershell -File &quot;C:\Windows\Temp\Win10Script.ps1&quot; -Force</Path>
+                    <Order>3</Order>
+                    <Description>1111</Description>
+                </RunAsynchronousCommand>
+                <RunAsynchronousCommand wcm:action="add">
+                    <Credentials>
+                        <Username>Administrator</Username>
+                        <Password>Senha123@</Password>
+                    </Credentials>
+                    <Path>cmd.exe /c powershell -Command Unblock-File C:\Windows\Temp\Win10Script.ps1</Path>
+                    <Description>1</Description>
+                    <Order>2</Order>
+                </RunAsynchronousCommand>
+            </RunAsynchronous>
+        </component>
+    </settings>
+    <cpi:offlineImage cpi:source="catalog:c:/osdbuilder/osbuilds/windows-10-enterprise-21h1-pessoal 19043.1526/iso/win10 x64 21h1 19043.1526/sources/install_windows 10 enterprise.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+</unattend>

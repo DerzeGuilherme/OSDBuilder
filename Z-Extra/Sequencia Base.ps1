@@ -97,3 +97,4 @@ Save-Module -Name OSD -Path D:\OSDBuilder\SeguraOSD\ContentPacks\_Global\PEPoshM
 # Ver se ira fazer pelo MDT ou eplo Instalador com Autounnattend
 # Fazer download das aplicacoes e realizar a imagem de referencia
 
+#https://theitbros.com/sysprep-windows-machine/
